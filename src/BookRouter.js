@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Auth from "./components/Auth";
+import BookShelf from "./components/BookShelf";
+import Navigation from "./components/Navigation";
 
 class BookRouter extends Component {
     static defaultProps = {};
@@ -12,7 +14,9 @@ class BookRouter extends Component {
     render() {
         return (
             <Router>
-                <Route exact path="/login" component={Auth} />
+                <Route  path="/" component={Navigation} />
+                <Route exact path="/auth" component={Auth} />
+                <Route exact path="/bookshelf" component={BookShelf}/>
             </Router>
         );
     }

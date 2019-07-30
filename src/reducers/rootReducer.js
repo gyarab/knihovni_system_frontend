@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import authFinancesReducer from "./authFinancesReducer";
+import authReducer from "./authReducer";
 
 export default combineReducers({
-    auth: authFinancesReducer,
+    auth: authReducer,
 
 });

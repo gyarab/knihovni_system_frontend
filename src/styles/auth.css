@@ -1,6 +1,46 @@
+body {
+    background-image: url("/images/bookshelf-min.jpg");
+}
+
 .aligner {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1
+}
+
+img {
+    border-radius: 50%;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px #000063 dashed;
+    padding-bottom: 0;
+}
+
+h3 {
+    text-align: center;
+    padding-bottom: 20px
+}
+
+.loginAuth {
+    background: #fff3d7;
+    padding: 30px;
+    transition: 0.4s;
+    /*box-shadow: 5px 5px 5px grey;*/
+}
+
+.loginAuth:hover{
+    padding: 30px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.loginAuth input {
+    padding: 20px;
+    text-align: center;
+}
+.swapForm{
+    color: grey;
+    padding-top: 10px;
+    cursor: pointer;
 }
