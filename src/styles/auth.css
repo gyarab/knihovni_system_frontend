@@ -1,15 +1,34 @@
 body {
-    background-image: url("/images/bookshelf-min.jpg");
+    background-image: url("/images/book-min-2.jpg");
+    overflow-x: hidden;
 }
 
 .aligner {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1
+    flex: 1;
+
 }
 
-img {
+.loginAuth {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 30px;
+    transition: 0.4s;
+    color:white;
+}
+
+.loginAuth:hover{
+    padding: 30px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.44);
+}
+
+.err input{
+    transition: 0.5s;
+     border-color: rgb(255, 125, 125) !important;
+ }
+
+.loginAuth img {
     border-radius: 50%;
     width: 20%;
     margin-left: auto;
@@ -18,29 +37,38 @@ img {
     padding-bottom: 0;
 }
 
-h3 {
+.loginAuth h3 {
     text-align: center;
     padding-bottom: 20px
 }
 
-.loginAuth {
-    background: #fff3d7;
-    padding: 30px;
-    transition: 0.4s;
-    /*box-shadow: 5px 5px 5px grey;*/
-}
-
-.loginAuth:hover{
-    padding: 30px;
-    box-shadow: 5px 5px 5px grey;
-}
-
 .loginAuth input {
-    padding: 20px;
-    text-align: center;
+    background-color: transparent;
+    /*text-align: center;*/
+    border:0;
+    border-radius: 0;
+    border-bottom: 1px solid white;
+    color:white
 }
+
+.loginAuth input:hover{
+    background-color: transparent;
+    color:white
+}
+
+.loginAuth input:focus {
+    background-color: transparent;
+    color: white;
+    outline: 0;
+    box-shadow: none ;
+}
+
 .swapForm{
     color: grey;
     padding-top: 10px;
     cursor: pointer;
+}
+
+.btn-wrapper .btn{
+    margin-bottom:5px;
 }

@@ -3,8 +3,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import {NavLink as Link} from "react-router-dom";
-import {authenticate, deleteErrors, googleAuth} from "../actionCreators/authActions";
 import {connect} from "react-redux";
+import '../styles/navigation.css'
 
 class Navigation extends Component {
     static defaultProps = {};
@@ -14,26 +14,23 @@ class Navigation extends Component {
     state = {
         name:''
     };
-    componentWillReceiveProps(nextProps, nextContext) {
-        console.log(nextProps.decodedJWT)
-    }
 
 
     render() {
         return (
-            <div><Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <div><Navbar className="navB" variant="dark" expand="lg">
+                <Navbar.Brand >451° F</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse className="justify-content-between" id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                    <Nav>
+                        <Nav.Link exact as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/bookshelf">Bookshelf</Nav.Link>
 
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown title="Add a Book" id="basic-nav-dropdown">
+                            <NavDropdown.Item as={Link} to="/expand#ISBN">Generate by ISBN</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/expand#title">Generate by Title</NavDropdown.Item>
                             <NavDropdown.Divider/>
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/expand#custom">Create a custom one</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Nav>
@@ -57,14 +54,6 @@ const mapStateToProps = state => ({
 
 });
 const mapDispatchToProps = (dispatch) => ({
-    logIn: (creds, type) => {
-        dispatch(authenticate(creds, type))
-    },
-    deleteErrors: () => {
-        dispatch(deleteErrors())
-    },
-    googleAuth: token_id => {
-        dispatch(googleAuth(token_id))
-    }
+
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

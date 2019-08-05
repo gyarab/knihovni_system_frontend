@@ -1,7 +1,5 @@
 const initialState = {
     isLogged: localStorage.getItem('logged') === 'true',
-    error: false,
-    errors: [],
 };
 
 export default (state = initialState, action) => {
@@ -10,12 +8,9 @@ export default (state = initialState, action) => {
             //action's payload is the jwt token
             return {...state, isLogged: true};
         case 'UNSUCCESSFUL_AUTH':
-            console.log('here');
-            return {error: true, errors: action.payload, isLogged: false};
+            return {isLogged: false};
         case 'LOG_OUT':
             return {...state, isLogged: false};
-        case 'DELETE_ERRORS':
-            return {...state, errors: []};
         default:
             return state;
     }

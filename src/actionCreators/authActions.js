@@ -16,12 +16,6 @@ export const authenticate = (creds, type) => dispatch => {
     )
 };
 
-export const deleteErrors = () => dispatch => {
-    dispatch({
-        type: 'DELETE_ERRORS'
-    })
-};
-
 export const googleAuth = token_id => dispatch => {
     fetch("http://localhost:5000/api/users/google", {
         body: JSON.stringify(token_id),
@@ -50,8 +44,8 @@ export const logOut = () => dispatch => {
 const check = (res, dispatch) => {
     if (res.status === 400 || res.status === 401 || res.status === 403) {
         dispatch({
-            type: 'UNSUCCESSFUL_AUTH',
-            payload: res.json
+            type: 'ERR',
+            payload: {json:res.json, origin: 'authenticating'}
         });
     } else {
         const {firstName,surname} = parseJwt(res.json.token);

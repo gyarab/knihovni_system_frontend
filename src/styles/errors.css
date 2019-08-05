@@ -1,0 +1,25 @@
+.errorsHolder{
+    position: absolute;
+    right: 10px;
+    top: 70px
+}
+.toast{
+    background-color: rgba(0, 0, 0, 0.11);
+    min-width: 275px;
+}
+.toast:hover{
+     cursor: pointer;
+ }
+.toast-header{
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #cdcdcd;
+    border-bottom: 1px solid rgba(128, 189, 255, 0.81);
+}
+.toast-body{
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #dbdbdb;
+}
+
+span{
+    color: rgb(255, 255, 255)
+}
