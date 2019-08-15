@@ -5,7 +5,6 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case 'ERR':
-            console.log('here');
             let errors = action.payload.json.map(element => {
                 return {
                     msg:element.msg,

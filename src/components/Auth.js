@@ -24,10 +24,15 @@ class Auth extends Component {
             password: "",
             password2: ""
         };
+        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmitRegister = this.handleSubmitRegister.bind(this);
+        this.handleSubmitRegister = this.handleSubmitRegister.bind(this);
+        this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
+        this.sendGoogleAuth = this.sendGoogleAuth.bind(this);
     }
 
 
-    redirect() {
+    static redirect() {
         if (localStorage.getItem('logged')) {
             return (<Redirect to='/'/>)
         }
@@ -72,7 +77,7 @@ class Auth extends Component {
     //Renders the register form
     renderRegister() {
         return (<Col xs={12} md={{span: 6, offset: 3}} lg={{span: 4, offset: 4}}>
-            <Card className={classNames({'loginAuth': true,'err':this.props.errors.length>0})}>
+            <Card className={classNames({'loginAuth': true, 'err': this.props.errors.length > 0})}>
                 <img src="images/logo.png" alt="logo"/>
                 <Card.Body>
 
@@ -87,7 +92,7 @@ class Auth extends Component {
                                 <Form.Control type="text"
                                               name="firstName"
                                               value={this.state.firstName}
-                                              onChange={this.handleInput.bind(this)}
+                                              onChange={this.handleInput}
                                 />
                             </Form.Group> : ""}
 
@@ -98,7 +103,7 @@ class Auth extends Component {
                                 <Form.Control type="text"
                                               name="surname"
                                               value={this.state.surname}
-                                              onChange={this.handleInput.bind(this)}
+                                              onChange={this.handleInput}
                                 />
                             </Form.Group> : ""}
 
@@ -107,7 +112,7 @@ class Auth extends Component {
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" name="email"
                                           value={this.state.email}
-                                          onChange={this.handleInput.bind(this)}/>
+                                          onChange={this.handleInput}/>
                             {this.state.register ? <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text> : ""}
@@ -119,7 +124,7 @@ class Auth extends Component {
                             <Form.Control type="password"
                                           name="password"
                                           value={this.state.password}
-                                          onChange={this.handleInput.bind(this)}/>
+                                          onChange={this.handleInput}/>
                         </Form.Group>
 
                         {/*Password retyped*/}
@@ -129,7 +134,7 @@ class Auth extends Component {
                                 <Form.Control type="password"
                                               name="password2"
                                               value={this.state.password2}
-                                              onChange={this.handleInput.bind(this)}/>
+                                              onChange={this.handleInput}/>
                             </Form.Group> : ""}
 
                         {/*Login options*/}
@@ -138,11 +143,11 @@ class Auth extends Component {
                             aria-label="Toolbar with Button groups">
                             {this.state.register ?
                                 <Button variant="primary" className='col-lg-5' type="submit"
-                                        onClick={this.handleSubmitRegister.bind(this)}>
+                                        onClick={this.handleSubmitRegister}>
                                     Register
                                 </Button> :
                                 <Button variant="primary" className='col-lg-5' type="submit"
-                                        onClick={this.handleSubmitLogin.bind(this)}>
+                                        onClick={this.handleSubmitLogin}>
                                     Login
                                 </Button>
                             }
@@ -155,7 +160,7 @@ class Auth extends Component {
                                         Google</Button>
                                 )}
                                 buttonText="Login"
-                                onSuccess={this.sendGoogleAuth.bind(this)}
+                                onSuccess={this.sendGoogleAuth}
                                 onFailure={() => console.log('fail')}
                                 cookiePolicy={'single_host_origin'}/>
                         </ButtonToolbar>
@@ -187,7 +192,7 @@ class Auth extends Component {
     render() {
 
         return (
-            <div className='aligner'>{this.redirect()}
+            <div className='aligner'>{Auth.redirect()}
                 <Row style={{width: 100 + 'vw'}}>
                     {this.state.auth === 'login' ? this.renderLogin() : this.renderRegister()}
 

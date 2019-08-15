@@ -5,6 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import {NavLink as Link} from "react-router-dom";
 import {connect} from "react-redux";
 import '../styles/navigation.css'
+import {logOut} from "../actionCreators/authActions";
 
 class Navigation extends Component {
     static defaultProps = {};
@@ -12,30 +13,32 @@ class Navigation extends Component {
     static propTypes = {};
 
     state = {
-        name:''
+        name: ''
     };
 
 
     render() {
         return (
             <div><Navbar className="navB" variant="dark" expand="lg">
-                <Navbar.Brand >451° F</Navbar.Brand>
+                <Navbar.Brand>451° F</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse className="justify-content-between" id="basic-navbar-nav">
                     <Nav>
                         <Nav.Link exact as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/bookshelf">Bookshelf</Nav.Link>
-
-                        <NavDropdown title="Add a Book" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/expand#ISBN">Generate by ISBN</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/expand#title">Generate by Title</NavDropdown.Item>
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item as={Link} to="/expand#custom">Create a custom one</NavDropdown.Item>
-                        </NavDropdown>
+                        {this.props.isLogged ? JSON.parse(localStorage.getItem("roles")).includes('teacher')?
+                            <NavDropdown title="Add a Book" id="basic-nav-dropdown">
+                                <NavDropdown.Item as={Link} to="/expand#ISBN">Generate by ISBN</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/expand#title">Generate by Title</NavDropdown.Item>
+                                <NavDropdown.Divider/>
+                                <NavDropdown.Item as={Link} to="/expand#custom">Create a custom one</NavDropdown.Item>
+                            </NavDropdown> : "" : ""}
                     </Nav>
                     <Nav>
                         {this.props.isLogged ?
-                            <Navbar.Text>
+                            <Navbar.Text onClick={() => {
+                                this.props.logOut();
+                            }}>
                                 Signed in as: {localStorage.getItem("name")}
                             </Navbar.Text> :
                             <Nav.Link as={Link} to="/auth">Login/Register</Nav.Link>
@@ -50,10 +53,10 @@ class Navigation extends Component {
 
 const mapStateToProps = state => ({
     isLogged: state.auth.isLogged,
-
-
 });
 const mapDispatchToProps = (dispatch) => ({
-
+    logOut: () => {
+        dispatch(logOut())
+    },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

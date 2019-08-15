@@ -1,35 +1,121 @@
-.wrapper{
-    flex:1;
+/*Wraper for all elements on the page*/
+.wrapper {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.form{
-    margin: auto;
     background-color: rgba(0, 0, 0, 0.75);
-    padding: 30px;
 }
-.form input {
-    background-color: transparent;
-    border:0;
-    border-radius: 0;
-    border-bottom: 1px solid white;
+.wrapper h2{
+    text-align: center;
     color:white;
+    padding-bottom: 20px;
+}
+/*CSS Regarding the input fields*/
+.form {
+    margin: auto;
+    /*background-color: rgba(0, 0, 0, 0.75);*/
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.form input, .form textarea {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.56);
+    color: white;
     margin-bottom: 20px !important;
 }
-.form input:hover{
+.form input:invalid {
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    transition: 0.5s;
+    border-bottom: 1px solid rgb(255, 125, 125);
+}
+
+.form input:hover, .form textarea:hover {
     background-color: transparent;
-    color:white;
+    color: white;
     margin-bottom: 20px;
 }
-.form input:focus {
+
+.form input:focus,.form textarea:focus {
     background-color: transparent;
     color: white;
     outline: 0;
-    box-shadow: none ;
+    box-shadow: none;
     margin-bottom: 20px;
 }
-.form h3{
-    color:white;
+
+.form h3 {
+    color: white;
     text-align: center;
+}
+
+form label{
+    color:white;
+}
+/*CSS configuring search results when searching by title/author*/
+.bookWrapper {
+    justify-content: center;
+    align-content: center;
+}
+
+.preWrap {
+    justify-content: space-around;
+    border: 1px solid rgba(195, 146, 6, 0.5);
+    background-color: rgba(0, 0, 0, 0.31);
+    color: white;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.4s;
+}
+
+.preWrap:hover {
+    border: 1px solid rgb(255, 193, 7);
+    cursor: pointer;
+}
+
+.preWrap span {
+    padding-bottom: 5px;
+}
+.preWrap:hover span {
+    white-space: normal;
+    text-overflow: unset;
+    display: unset;
+    overflow: hidden
+}
+
+.preWrap img {
+    display: block;
+    padding: 20px;
+}
+/*Genres*/
+.badge{
+    margin-left:5px;
+}
+.badge:hover{
+    cursor: pointer;
+    color:white;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+#image {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.title{
+    border: 1px solid #FFC107;
+}
+.ISBN{
+    border: 1px solid #28A745;
+}
+.custom{
+    border: 1px solid #DC3545;
 }

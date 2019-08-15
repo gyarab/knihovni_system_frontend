@@ -34,8 +34,11 @@ export const googleAuth = token_id => dispatch => {
     )
 };
 export const logOut = () => dispatch => {
-    localStorage.setItem('logged', false);
+    localStorage.removeItem('logged');
     localStorage.removeItem('auth');
+    localStorage.removeItem('roles');
+    localStorage.removeItem('name');
+    localStorage.removeItem('id');
     dispatch({
         type: 'LOG_OUT'
     })
@@ -45,13 +48,15 @@ const check = (res, dispatch) => {
     if (res.status === 400 || res.status === 401 || res.status === 403) {
         dispatch({
             type: 'ERR',
-            payload: {json:res.json, origin: 'authenticating'}
+            payload: {json: res.json, origin: 'authenticating'}
         });
     } else {
-        const {firstName,surname} = parseJwt(res.json.token);
-        localStorage.setItem('name', `${firstName} ${surname}`);
+        const {name, sub, roles} = parseJwt(res.json.token);
+        localStorage.setItem('name', name);
+        localStorage.setItem('id', sub);
         localStorage.setItem('logged', true);
         localStorage.setItem('auth', res.json.token);
+        localStorage.setItem('roles', JSON.stringify(roles));
         dispatch({
             type: 'SUCCESSFUL_AUTH',
             payload: res.json.token,

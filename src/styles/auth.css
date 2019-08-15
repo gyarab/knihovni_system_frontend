@@ -28,6 +28,7 @@ body {
      border-color: rgb(255, 125, 125) !important;
  }
 
+
 .loginAuth img {
     border-radius: 50%;
     width: 20%;
@@ -49,6 +50,14 @@ body {
     border-radius: 0;
     border-bottom: 1px solid white;
     color:white
+}
+
+.loginAuth input:invalid{
+    transition: 0.5s;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    border-color: rgb(255, 125, 125) !important;
 }
 
 .loginAuth input:hover{
