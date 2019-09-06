@@ -16,6 +16,18 @@ class Navigation extends Component {
         name: ''
     };
 
+    admin() {
+        if (this.props.isLogged && JSON.parse(localStorage.getItem("roles")).includes('teacher')) {
+            return (
+                <NavDropdown title="Add a Book" id="basic-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/expand#ISBN">Generate by ISBN</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/expand#title">Generate by Title</NavDropdown.Item>
+                    <NavDropdown.Divider/>
+                    <NavDropdown.Item as={Link} to="/expand#custom">Create a custom one</NavDropdown.Item>
+                </NavDropdown>)
+
+        }
+    }
 
     render() {
         return (
@@ -24,16 +36,11 @@ class Navigation extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse className="justify-content-between" id="basic-navbar-nav">
                     <Nav>
-                        <Nav.Link exact as={Link} to="/">Home</Nav.Link>
-                        <Nav.Link as={Link} to="/bookshelf">Bookshelf</Nav.Link>
-                        {this.props.isLogged ? JSON.parse(localStorage.getItem("roles")).includes('teacher')?
-                            <NavDropdown title="Add a Book" id="basic-nav-dropdown">
-                                <NavDropdown.Item as={Link} to="/expand#ISBN">Generate by ISBN</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/expand#title">Generate by Title</NavDropdown.Item>
-                                <NavDropdown.Divider/>
-                                <NavDropdown.Item as={Link} to="/expand#custom">Create a custom one</NavDropdown.Item>
-                            </NavDropdown> : "" : ""}
+                        <Nav.Link exact as={Link} to="/dashboard">Dashboard</Nav.Link>
+                        {this.admin()}
                     </Nav>
+
+
                     <Nav>
                         {this.props.isLogged ?
                             <Navbar.Text onClick={() => {

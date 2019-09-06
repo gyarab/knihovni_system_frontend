@@ -1,0 +1,170 @@
+.adminWrapper {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+}
+
+.adminWrapper .shelfWrapper {
+    background-color: transparent;
+    width: 100%;
+}
+
+.adminWrapper .searchWrapper {
+    background-color: transparent;
+    width: 90%;
+}
+
+.adminWrapper .bookCard {
+    width: 90%;
+}
+
+.dashRow {
+    display: flex;
+    flex: 1
+}
+
+.takenList {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    padding: 10px;
+
+    text-align: center;
+}
+
+.takenSearchTypes {
+    display: flex;
+    justify-content: space-evenly;
+    color: white
+}
+
+.takenSearchTypes:hover {
+    cursor: pointer;
+}
+
+.left {
+    border-right: 1px solid rgba(128, 189, 255, 0.6);
+}
+
+.right {
+    border-left: 1px solid rgba(128, 189, 255, 0.6);
+}
+
+.takenItem {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.takenItem:hover {
+    cursor: pointer;
+}
+
+.takenItem + .takenItem {
+    margin-top: 10px
+}
+
+.dashboard {
+    flex: 6;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+    .dashRow {
+        flex-direction: column;
+    }
+
+    .takenList {
+        flex: 6;
+    }
+
+    .left {
+        border-bottom: 1px solid rgba(128, 189, 255, 0.6);
+    }
+
+    .right {
+        border-top: 1px solid rgba(128, 189, 255, 0.6);
+        order: 0;
+    }
+
+    .dashboard {
+        margin-top: 10px;
+        flex: 12;
+    }
+}
+
+.buttonReturn {
+    margin-bottom: 10px;
+}
+
+.switch {
+    color: white;
+    text-align: center;
+    display: block;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.switch h6 {
+    display: inline-block;
+}
+
+.switch:hover {
+    cursor: pointer;
+}
+
+.divider {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    width: 150px;
+    height: 1px;
+    margin-bottom: 5px;
+}
+
+.statusType {
+    color: white;
+}
+
+.statusType:hover {
+    cursor: pointer;
+}
+
+.readerWrapper {
+    display: flex;
+    align-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.reader {
+    width: 80%;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.reader img {
+    padding: 10px;
+}
+
+.reader .readerName {
+
+    align-self: center;
+}
+
+.name {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.name:hover {
+    cursor: pointer;
+}

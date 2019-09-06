@@ -8,25 +8,26 @@ body {
     justify-content: center;
     align-items: center;
     flex: 1;
-
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
 .loginAuth {
-    background: rgba(0, 0, 0, 0.75);
+    background-color: transparent;
+    border-color: red;
     padding: 30px;
     transition: 0.4s;
-    color:white;
+    color: white;
 }
 
-.loginAuth:hover{
+.loginAuth:hover {
     padding: 30px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.44);
 }
 
-.err input{
+.err input {
     transition: 0.5s;
-     border-color: rgb(255, 125, 125) !important;
- }
+    border-color: rgb(255, 125, 125) !important;
+}
 
 
 .loginAuth img {
@@ -43,41 +44,12 @@ body {
     padding-bottom: 20px
 }
 
-.loginAuth input {
-    background-color: transparent;
-    /*text-align: center;*/
-    border:0;
-    border-radius: 0;
-    border-bottom: 1px solid white;
-    color:white
-}
-
-.loginAuth input:invalid{
-    transition: 0.5s;
-    border: none;
-    outline: 0;
-    box-shadow: none;
-    border-color: rgb(255, 125, 125) !important;
-}
-
-.loginAuth input:hover{
-    background-color: transparent;
-    color:white
-}
-
-.loginAuth input:focus {
-    background-color: transparent;
-    color: white;
-    outline: 0;
-    box-shadow: none ;
-}
-
-.swapForm{
+.swapForm {
     color: grey;
     padding-top: 10px;
     cursor: pointer;
 }
 
-.btn-wrapper .btn{
-    margin-bottom:5px;
+.btn-wrapper .btn {
+    margin-bottom: 5px;
 }

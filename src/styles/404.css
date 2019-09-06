@@ -1,0 +1,18 @@
+.pnfWrap {
+
+    color: white;
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.pnfWrap span {
+    font-size: 5rem;
+}
+
+.pnfWrap .nav-link {
+    padding: 0;
+}

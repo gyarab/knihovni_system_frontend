@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
 import '../styles/books.css'
-import {getAllBooks, reserveBook, returnBook, searchBookByParameter} from "../actionCreators/bookActions";
+import {getAllBooks, searchBookByParameter} from "../actionCreators/bookActions";
 import {connect} from "react-redux";
 import classNames from "classnames";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBook} from "@fortawesome/free-solid-svg-icons/faBook";
-import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
-import {faFingerprint} from "@fortawesome/free-solid-svg-icons/faFingerprint";
-import {faSortAlphaDown} from "@fortawesome/free-solid-svg-icons/faSortAlphaDown";
-import {faSortAlphaDownAlt} from "@fortawesome/free-solid-svg-icons/faSortAlphaDownAlt";
-import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
-import {faCalendarAlt} from "@fortawesome/free-solid-svg-icons/faCalendarAlt";
 import Collapse from "react-bootstrap/Collapse";
 import Button from "react-bootstrap/Button";
-import {faHighlighter} from "@fortawesome/free-solid-svg-icons/faHighlighter";
+import {clearBorrowArray, selectToBorrow} from "../actionCreators/internalActions";
+import {borrowBooks} from "../actionCreators/adminActions";
+import Form from "react-bootstrap/Form";
+import Badge from "react-bootstrap/Badge";
+import Book from "./Book";
+import * as debounce from "debounce";
 
 
 class Bookshelf extends Component {
@@ -27,78 +25,71 @@ class Bookshelf extends Component {
         bookSearch: "",
         searchParam: 'title',
         open: false,
+        mail: '',
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.borrow = this.borrow.bind(this);
+        this.loadSelectedBooks = this.loadSelectedBooks.bind(this);
+        this.search = this.search.bind(this);
+
+        this.search = debounce(this.search, 500);
+    }
+
+    borrow() {
+        let tempArr = this.props.borrowArr.map(item => item.id);
+        let obj = {email: this.state.mail, idArr: tempArr};
+        this.props.borrow(obj);
+        this.props.clearBorrowArray();
+    }
+
+    search() {
+        if (this.state.bookSearch !== "") this.props.searchBookByParameter(this.state.bookSearch, this.state.searchParam);
+        else this.props.getAllBooks(localStorage.getItem('sort'));
+    }
+
+
+    loadSelectedBooks() {
+        return [
+            <Badge key='clearAll' size="lg" variant="warning" onClick={() => {
+                this.props.clearBorrowArray();
+            }}>Clear All</Badge>
+            , this.props.borrowArr.map((item, index) => {
+                return (
+                    <Badge key={index} size="lg" variant="light" onClick={() => {
+                        this.props.selectToBorrow([{id: item.id, title: item.title}])
+                    }}>{item.title}</Badge>
+                )
+            })]
+
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.borrowerEmail !== "" || nextProps.borrowerEmail !== this.state.mail) {
+            this.setState({mail: nextProps.borrowerEmail})
+        }
     }
 
     componentDidMount() {
         this.props.getAllBooks(localStorage.getItem('sort'))
     }
 
-    handleChange(event) {
-        this.setState({[event.target.name]: event.target.value});
-    }
-
-    bookActions(item) {
-        if (item.status === 'available' && this.props.isLogged) {
-            return (
-                <Collapse in={this.state.open === item.title}>
-                    <div id="collapseButtons">
-                        <Button onClick={() => {
-                            this.props.reserveBook(item._id);
-                            this.props.getAllBooks(localStorage.getItem('sort'));
-                        }} variant={"outline-light"} size={"sm"}><FontAwesomeIcon
-                            icon={faHighlighter}/> Reserve</Button>
-                        {this.props.msg}
-                    </div>
-                </Collapse>)
-        } else if (item.status === 'reserved' && item.borrowerId === localStorage.getItem('id')) {
-            return (<Collapse in={this.state.open === item.title}>
-                <div id="collapseButtons">
-                    <Button onClick={() => {
-                        this.props.returnBook(item._id);
-                        this.props.getAllBooks(localStorage.getItem('sort'));
-                    }} variant={"outline-light"} size={"sm"}><FontAwesomeIcon
-                        icon={faHighlighter}/> Cancel</Button>
-                    {this.props.msg}
-                </div>
-            </Collapse>)
+    async handleChange(event) {
+        let name = event.target.name;
+        await this.setState({[name]: event.target.value});
+        if (name === 'bookSearch') {
+            this.search()
         }
     }
+
 
     books() {
         if (this.props.allBooks.length > 0) {
             return this.props.allBooks.map((item, index) => {
                 return (
-                    <div className={classNames("bookCard", {notAvailable: item.status !== 'available'})} key={index}>
-                        <div className="column">
-                            <div className="img"
-                                 style={{backgroundImage: `url(http://192.168.1.3:5000/images/${item.ISBN}${item.extension})`}}/>
-                            {this.bookActions(item)}
-                        </div>
-
-                        <div className="column6" onClick={() => {
-                            if (this.state.open !== item.title) {
-                                this.setState({open: item.title})
-                            } else this.setState({open: false})
-                        }}>
-                            <span className={"spanTitle"}><b>Title:</b> {item.title}</span>
-                            <span className={"item"}><b>Author:</b> {item.author}</span>
-                            <span className={"item"}><b>Date published:</b> {item.datePublished}</span>
-                            <span className={"item"}><b>Status:</b> {item.status}</span>
-                            {this.state.open !== item.title ?
-                                <span className={"desc"}><i>Click for description</i></span> :
-                                <span className={"desc"}><b>Description:</b></span>}
-                            <Collapse in={this.state.open === item.title}>
-                                <div id="example-collapse-text">
-                                    <span className={"desc"}>{item.desc}</span>
-                                </div>
-                            </Collapse>
-                        </div>
-                    </div>
+                    <Book item={item} key={index}/>
                 )
             })
         }
@@ -111,30 +102,27 @@ class Bookshelf extends Component {
                     <InputGroup>
                         <FormControl name="bookSearch" placeholder="Search for the book you wish to get!"
                                      onChange={this.handleChange}
-                                     value={this.state.bookSearch}
-                                     onKeyDown={(e) => {
-                                         if (e.key === 'Enter') {
-                                             if (this.state.bookSearch !== "") this.props.searchBookByParameter(this.state.bookSearch, this.state.searchParam);
-                                             else this.props.getAllBooks(localStorage.getItem('sort'));
-                                         }
-                                     }}/>
+                                     value={this.state.bookSearch}/>
                     </InputGroup>
+
+                    {/*Tool Bar*/}
                     <div className="selectionBar">
+                        {/*Search by:*/}
                         <div className="radioSelection">
                             <div onClick={() => this.setState({searchParam: 'title'})}
                                  className={classNames("radioOption", {" activeR": this.state.searchParam === 'title'})}>
-                                <FontAwesomeIcon className="radioSearch" icon={faBook} size="lg"/> Title
+                                <FontAwesomeIcon className="radioSearch" icon='book' size="lg"/> Title
                             </div>
                             <div onClick={() => this.setState({searchParam: 'author'})}
                                  className={classNames("radioOption", {" activeR": this.state.searchParam === 'author'})}>
-                                <FontAwesomeIcon className="radioSearch" icon={faUser} size="lg"/> Author
+                                <FontAwesomeIcon className="radioSearch" icon='user' size="lg"/> Author
                             </div>
                             <div onClick={() => this.setState({searchParam: 'ISBN'})}
                                  className={classNames("radioOption", {" activeR": this.state.searchParam === 'ISBN'})}>
-                                <FontAwesomeIcon className="radioSearch" icon={faFingerprint} size="lg"/> ISBN
+                                <FontAwesomeIcon className="radioSearch" icon='fingerprint' size="lg"/> ISBN
                             </div>
                         </div>
-
+                        {/*Sort by:*/}
                         <div className="radioSelection">
                             <div onClick={() => {
                                 if (localStorage.getItem('sort') === 'title') {
@@ -144,8 +132,8 @@ class Bookshelf extends Component {
                             }}
                                  className={classNames("radioOption", {" activeR": localStorage.getItem('sort') === 'title' || localStorage.getItem('sort') === '-title'})}>
                                 <FontAwesomeIcon className="radioSearch"
-                                                 icon={localStorage.getItem('sort') === 'title' ? faSortAlphaDown : localStorage.getItem('sort') === '-title' ? faSortAlphaDownAlt : faMinus}/> By
-                                Title
+                                                 icon={localStorage.getItem('sort') === 'title' ? 'sort-alpha-down' : localStorage.getItem('sort') === '-title' ? 'sort-alpha-down-alt' : 'minus'}
+                                                 size="lg"/> By Title
                             </div>
                             <div onClick={() => {
                                 if (localStorage.getItem('sort') === 'author') {
@@ -155,7 +143,7 @@ class Bookshelf extends Component {
                             }}
                                  className={classNames("radioOption", {" activeR": localStorage.getItem('sort') === 'author' || localStorage.getItem('sort') === '-author'})}>
                                 <FontAwesomeIcon className="radioSearch"
-                                                 icon={localStorage.getItem('sort') === 'author' ? faSortAlphaDown : localStorage.getItem('sort') === '-author' ? faSortAlphaDownAlt : faMinus}
+                                                 icon={localStorage.getItem('sort') === 'author' ? 'sort-alpha-down' : localStorage.getItem('sort') === '-author' ? 'sort-alpha-down-alt' : 'minus'}
                                                  size="lg"/> By Author
                             </div>
                             <div onClick={() => {
@@ -164,11 +152,29 @@ class Bookshelf extends Component {
                             }}
                                  className={classNames("radioOption", {" activeR": localStorage.getItem('sort') === '-dateAdded'})}>
                                 <FontAwesomeIcon className="radioSearch"
-                                                 icon={localStorage.getItem('sort') === '-dateAdded' ? faCalendarAlt : faMinus}
+                                                 icon={localStorage.getItem('sort') === '-dateAdded' ? 'calendar-alt' : 'minus'}
                                                  size="lg"/> Recent
                             </div>
                         </div>
                     </div>
+                    {/*Shows borrow button when something's selected*/}
+                    <Collapse in={this.props.borrowArr.length > 0}>
+                        <div className="bookBorrowWrapper">
+                            <h4>Lend books</h4>
+                            {this.loadSelectedBooks()}
+                            <Form.Control
+                                name='mail'
+                                onChange={this.handleChange}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') this.borrow();
+                                }}
+                                value={this.state.mail}
+                                placeholder="E-mail address of borrower"/>
+                            <Button variant="light" block onClick={this.borrow} className="buttonBorrow">
+                                Borrow
+                            </Button>
+                        </div>
+                    </Collapse>
                 </div>
                 {this.books()}
             </div>
@@ -178,9 +184,8 @@ class Bookshelf extends Component {
 
 const mapStateToProps = state => ({
     allBooks: state.books.all,
-    errors: state.books.errs,
-    isLogged: state.auth.isLogged,
-    msg: state.books.msg,
+    borrowArr: state.internal.borrowArr,
+    borrowerEmail: state.internal.email
 });
 const mapDispatchToProps = (dispatch) => ({
     getAllBooks: (sort) => {
@@ -189,12 +194,14 @@ const mapDispatchToProps = (dispatch) => ({
     searchBookByParameter: (title, type) => {
         dispatch(searchBookByParameter(title, type))
     },
-    reserveBook: (id) => {
-        dispatch(reserveBook(id));
+    selectToBorrow: (arr) => {
+        dispatch(selectToBorrow(arr));
     },
-    returnBook: (id) => {
-        dispatch(returnBook(id));
+    borrow: (obj) => {
+        dispatch(borrowBooks(obj));
+    },
+    clearBorrowArray: () => {
+        dispatch(clearBorrowArray())
     }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Bookshelf);
-

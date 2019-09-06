@@ -34,7 +34,7 @@ class Auth extends Component {
 
     static redirect() {
         if (localStorage.getItem('logged')) {
-            return (<Redirect to='/'/>)
+            return (<Redirect to='/dashboard'/>)
         }
     };
 
@@ -75,7 +75,7 @@ class Auth extends Component {
     }
 
     //Renders the register form
-    renderRegister() {
+    renderAuth() {
         return (<Col xs={12} md={{span: 6, offset: 3}} lg={{span: 4, offset: 4}}>
             <Card className={classNames({'loginAuth': true, 'err': this.props.errors.length > 0})}>
                 <img src="images/logo.png" alt="logo"/>
@@ -161,7 +161,7 @@ class Auth extends Component {
                                 )}
                                 buttonText="Login"
                                 onSuccess={this.sendGoogleAuth}
-                                onFailure={() => console.log('fail')}
+                                onFailure={(e) => console.log(e)}
                                 cookiePolicy={'single_host_origin'}/>
                         </ButtonToolbar>
 
@@ -194,7 +194,7 @@ class Auth extends Component {
         return (
             <div className='aligner'>{Auth.redirect()}
                 <Row style={{width: 100 + 'vw'}}>
-                    {this.state.auth === 'login' ? this.renderLogin() : this.renderRegister()}
+                    {this.renderAuth()}
 
                 </Row>
             </div>

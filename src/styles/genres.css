@@ -1,0 +1,16 @@
+.genre {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /*border-bottom: 1px solid rgba(255, 255, 255, 0.35);*/
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.genre:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 1.07em
+}
+.activeG{
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 1.07em
+}

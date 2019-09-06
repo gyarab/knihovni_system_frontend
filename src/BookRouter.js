@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import Auth from "./components/Auth";
-import Bookshelf from "./components/Bookshelf";
 import Navigation from "./components/Navigation";
 import AddBook from "./components/AddBook";
 import Errors from "./components/Errors";
+import Dashboard from "./components/Dashboard";
+import PageNotFound from "./components/PageNotFound";
 
 class BookRouter extends Component {
     static defaultProps = {};
@@ -16,11 +17,15 @@ class BookRouter extends Component {
     render() {
         return (
             <Router>
-                <Route path="/" component={Navigation} />
-                <Route exact path="/auth" component={Auth} />
-                <Route exact path="/bookshelf" component={Bookshelf}/>
-                <Route exact path="/expand" component={AddBook}/>
-                <Route path="/" component={Errors} />
+                <Route path="/" component={Navigation}/>
+                <Route path="/" component={Errors}/>
+                <Switch>
+                    <Route exact path="/auth" component={Auth}/>
+                    <Route exact path="/expand" component={AddBook}/>
+                    <Route exact path="/dashboard" component={Dashboard}/>
+                    <Route exact path="/" component={() => <Redirect to="/dashboard"/>}/>
+                    <Route path="/" component={() => <PageNotFound/>}/>
+                </Switch>
             </Router>
         );
     }
