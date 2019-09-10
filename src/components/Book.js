@@ -8,6 +8,9 @@ import {returnTakenBooks} from "../actionCreators/adminActions";
 import {selectToBorrow} from "../actionCreators/internalActions";
 import {connect} from "react-redux";
 import '../styles/singleBook.css'
+import {myConfig} from "../config";
+
+let {url} = myConfig;
 
 class Book extends Component {
     static defaultProps = {};
@@ -96,7 +99,7 @@ class Book extends Component {
                 {/*Book cover*/}
                 <div className="column">
                     <div className="img"
-                         style={{backgroundImage: `url(http://192.168.1.3:5000/images/${ISBN}${extension})`}}/>
+                         style={{backgroundImage: `url(http://${url}:5000/images/${ISBN}${extension})`}}/>
                     {this.bookActions(item)}
                 </div>
                 {/*Book info*/}
