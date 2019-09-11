@@ -2,7 +2,7 @@ import { myConfig } from '../config.js';
 let {url} = myConfig;
 //Log in/ or register based on the second parameter
 export const authenticate = (creds, type) => dispatch => {
-    fetch(`http://${url}:5000/api/users/${type}`, {
+    fetch(`${url}/api/users/${type}`, {
         body: JSON.stringify(creds),
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
@@ -19,7 +19,7 @@ export const authenticate = (creds, type) => dispatch => {
 };
 
 export const googleAuth = token_id => dispatch => {
-    fetch(`http://${url}:5000/api/users/google`, {
+    fetch(`${url}/api/users/google`, {
         body: JSON.stringify(token_id),
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},

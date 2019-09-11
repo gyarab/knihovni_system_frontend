@@ -3,7 +3,7 @@ import {myConfig} from "../config";
 
 let {url} = myConfig;
 export const loadTakenBooks = () => dispatch => {
-    fetch(`http://${url}:5000/api/admin/all`, {
+    fetch(`${url}/api/admin/all`, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem('auth')}`,
         }
@@ -14,7 +14,7 @@ export const loadTakenBooks = () => dispatch => {
 };
 
 export const searchTakenBooks = (search, type) => dispatch => {
-    fetch(`http://${url}:5000/api/admin/search/${type}/${search}`, {
+    fetch(`${url}/api/admin/search/${type}/${search}`, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem('auth')}`,
         }
@@ -28,7 +28,7 @@ export const searchTakenBooks = (search, type) => dispatch => {
 };
 
 export const returnTakenBooks = (arr) => dispatch => {
-    fetch(`http://${url}:5000/api/admin/return`, {
+    fetch(`${url}/api/admin/return`, {
         method: 'post',
         body: JSON.stringify({idArr: arr}),
         mode: 'cors',
@@ -52,7 +52,7 @@ export const returnTakenBooks = (arr) => dispatch => {
 };
 
 export const borrowBooks = (obj) => dispatch => {
-    fetch(`http://${url}:5000/api/admin/borrow`, {
+    fetch(`${url}/api/admin/borrow`, {
         method: 'post',
         body: JSON.stringify(obj),
         mode: 'cors',
@@ -76,7 +76,7 @@ export const borrowBooks = (obj) => dispatch => {
 };
 
 export const currentReaders = (type) => dispatch => {
-        fetch(`http://${url}:5000/api/admin/users/${type}`)
+        fetch(`${url}/api/admin/users/${type}`)
             .then(res => res.json())
             .then(res => {
                 dispatch({
