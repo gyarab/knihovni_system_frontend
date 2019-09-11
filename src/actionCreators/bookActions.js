@@ -4,7 +4,7 @@ import {myConfig} from "../config";
 let {url} = myConfig;
 
 export const getAllBooks = (sort) => dispatch => {
-    fetch(`http://${url}:5000/api/books/all/${sort}`)
+    fetch(`${url}/api/books/all/${sort}`)
         .then(async response => {
             let json = await response.json();
             return {json: json, status: response.status}
@@ -17,7 +17,7 @@ export const getAllBooks = (sort) => dispatch => {
 };
 
 export const createBookByISBN = (ISBN) => dispatch => {
-    fetch(`http://${url}:5000/api/books/post/ISBN`, {
+    fetch(`${url}/api/books/post/ISBN`, {
         method: 'POST',
         body: JSON.stringify({ISBN: ISBN}),
         mode: 'cors',
@@ -31,7 +31,7 @@ export const createBookByISBN = (ISBN) => dispatch => {
 };
 
 export const saveBookByTitle = (title, index) => dispatch => {
-    fetch(`http://${url}:5000/api/books/prePost`, {
+    fetch(`${url}/api/books/prePost`, {
         method: 'POST',
         body: JSON.stringify({title, index: index || 5}),
         mode: 'cors',
@@ -44,10 +44,10 @@ export const saveBookByTitle = (title, index) => dispatch => {
 
 };
 
-export const saveBook = (url) => dispatch => {
-    fetch(`http://${url}:5000/api/books/post/url`, {
+export const saveBook = (bookUrl) => dispatch => {
+    fetch(`${url}/api/books/post/url`, {
         method: 'POST',
-        body: JSON.stringify({url: url}),
+        body: JSON.stringify({url: bookUrl}),
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
     }).then(async response => {
@@ -58,7 +58,7 @@ export const saveBook = (url) => dispatch => {
 };
 
 export const saveCustomBook = (book, file) => dispatch => {
-    fetch(`http://${url}:5000/api/books/post/custom`, {
+    fetch(`${url}/api/books/post/custom`, {
         method: 'POST',
         body: JSON.stringify(book),
         mode: 'cors',
@@ -75,7 +75,7 @@ export const saveCustomBook = (book, file) => dispatch => {
 };
 
 export const searchBookByParameter = (title, param) => dispatch => {
-    fetch(`http://${url}:5000/api/books/search/${param}/${title}`)
+    fetch(`${url}/api/books/search/${param}/${title}`)
         .then(async response => {
             let json = await response.json();
             return {json: json, status: response.status}
@@ -85,7 +85,7 @@ export const searchBookByParameter = (title, param) => dispatch => {
 };
 
 export const reserveBook = (id) => dispatch => {
-    fetch(`http://${url}:5000/api/books/reserve/${id}`, {
+    fetch(`${url}/api/books/reserve/${id}`, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem('auth')}`,
         }
@@ -102,7 +102,8 @@ export const reserveBook = (id) => dispatch => {
 };
 
 export const getAllGenres = () => dispatch => {
-    fetch(`http://${url}:5000/api/books/genres`)
+    // fetch(`${url}/api/books/genres`)
+    fetch(`${url}/api/books/genres`)
         .then(res => res.json())
         .then(response => {
             dispatch({
@@ -113,7 +114,7 @@ export const getAllGenres = () => dispatch => {
 };
 
 export const getAllBooksByGenre = (genre) => dispatch => {
-    fetch(`http://${url}:5000/api/books/genre`,{
+    fetch(`${url}/api/books/genre`,{
         method: 'POST',
         body: JSON.stringify({genre}),
         mode: 'cors',
@@ -130,7 +131,7 @@ export const getAllBooksByGenre = (genre) => dispatch => {
 };
 
 export const searchThroughGenres = (genre) => dispatch => {
-    fetch(`http://${url}:5000/api/books/genres/search`,{
+    fetch(`${url}/api/books/genres/search`,{
         method: 'POST',
         body: JSON.stringify({genre}),
         mode: 'cors',
@@ -151,7 +152,7 @@ export const searchThroughGenres = (genre) => dispatch => {
 const sendImage = (file, id) => {
     let form = new FormData();
     form.append("photo", file);
-    fetch(`http://${url}:5000/api/books/post/custom/${id}`, { // Your POST endpoint
+    fetch(`${url}/api/books/post/custom/${id}`, { // Your POST endpoint
         method: 'POST',
         body: form,
     }).then(
