@@ -99,7 +99,7 @@ class Book extends Component {
                 {/*Book cover*/}
                 <div className="column">
                     <div className="img"
-                         style={{backgroundImage: `url(http://${url}:5000/images/${ISBN}${extension})`}}/>
+                         style={{backgroundImage: `url(${url}/images/${ISBN}${extension})`}}/>
                     {this.bookActions(item)}
                 </div>
                 {/*Book info*/}
