@@ -27,6 +27,7 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
+        if(this.props.isLogged && JSON.parse(localStorage.getItem("roles")).includes('teacher'))
         this.props.loadTakenBooks()
     }
 
@@ -41,8 +42,8 @@ class Dashboard extends Component {
         this.props.changeDashboardType();
     }
 
-    genres() {
-        return (<div className="takenList right"><Genres/></div>)
+    static genres() {
+        return (<div className="genreList right"><Genres/></div>)
     }
 
 

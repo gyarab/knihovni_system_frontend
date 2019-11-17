@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {getAllBooks, getAllBooksByGenre, getAllGenres, searchThroughGenres} from "../actionCreators/bookActions";
 import '../styles/genres.css'
-import classNames from "classnames";
 import Form from "react-bootstrap/Form";
 import * as debounce from "debounce";
+import ListGroup from "react-bootstrap/ListGroup";
 
 class Genres extends Component {
     static defaultProps = {};
@@ -32,7 +32,7 @@ class Genres extends Component {
     }
 
     async handleChange(event) {
-       await this.setState({[event.target.name]: event.target.value});
+        await this.setState({[event.target.name]: event.target.value});
         this.search();
     }
 
@@ -48,7 +48,7 @@ class Genres extends Component {
     render() {
         return (
             <div>
-                <h4>{this.props.genre}</h4>
+                <h4>{this.props.genre === 'All' ? 'Všechny Knihy' : this.props.genre}</h4>
                 <Form.Control
                     className="genreSearch"
                     name="search"
@@ -56,7 +56,7 @@ class Genres extends Component {
                     onChange={this.handleChange}
                     value={this.state.search}
                 />
-                {this.genres()}
+                <ListGroup variant="flush"> {this.genres()}</ListGroup>
             </div>
         );
     }
@@ -72,9 +72,9 @@ class GenreItem extends Component {
     render() {
         let {genre, selectedGenre} = this.props;
         return (
-            <div className={classNames('genre', {'activeG': genre.name === selectedGenre})} onClick={this.handleClick}>
+            <ListGroup.Item action active={genre.name === selectedGenre} onClick={this.handleClick}>
                 {genre.name} ({genre.amount})
-            </div>)
+            </ListGroup.Item>)
     }
 }
 
