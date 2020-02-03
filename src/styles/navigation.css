@@ -1,3 +1,18 @@
-.navB{
-    background-color: rgba(0, 0, 0, 0.74);
+.navB {
+    background-color: rgba(0, 0, 0, 0.45);
+    color: white
+}
+.dropdown-menu{
+    background-color: rgba(0, 0, 0, 0.78);
+}
+.dropdown-item{
+    color:white;
+}
+.dropdown-item:hover{
+    background-color: rgba(255, 255, 255, 0.11);
+    color:white
+}
+.dropdown-item.active{
+    background-color: white;
+    color:black;
 }

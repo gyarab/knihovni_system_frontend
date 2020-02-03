@@ -13,6 +13,10 @@ body {
     height: 100%;
     color:white;
     font-family: 'Roboto', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/book-min-2.jpg");
+
+    overflow-x: hidden;
+
 }
 
 html {
@@ -63,7 +67,7 @@ input:focus, textarea:focus {
 }
 
 h3 {
-    color: white;
+    /*color: white;*/
     text-align: center;
 }
 

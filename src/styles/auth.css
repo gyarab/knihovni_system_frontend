@@ -1,14 +1,8 @@
-body {
-    background-image: url("/images/book-min-2.jpg");
-    overflow-x: hidden;
-}
-
 .aligner {
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
-    background-color: rgba(0, 0, 0, 0.75);
 }
 
 .loginAuth {

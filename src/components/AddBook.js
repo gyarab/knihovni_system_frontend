@@ -130,7 +130,7 @@ class AddBook extends Component {
                         </InputGroup>
                         <SplitButton id="splitButton1" className="col-2 offset-5"
                                      title="Search"
-                                     variant="outline-warning"
+                                     variant="outline-light"
                                      onClick={() => {
                                          this.props.searchBookByTitle(this.state.titleSearch, localStorage.getItem('num'));
                                          // this.setState({titleSearch: ""})

@@ -42,7 +42,7 @@ class Dashboard extends Component {
         this.props.changeDashboardType();
     }
 
-    static genres() {
+    genres() {
         return (<div className="genreList right"><Genres/></div>)
     }
 

@@ -42,7 +42,7 @@ class Book extends Component {
                 //For some reason I can't pass a value that's an object. Needs to be a string.
                 // I stringify it here and then parse in the function that's called onClick.
                 <Button onClick={this.select} value={JSON.stringify(item)}
-                        variant={"outline-light"} size={"sm"} className="brwBtn">
+                        variant="outline-warning" size={"sm"} className="brwBtn">
                     <FontAwesomeIcon icon='plus'/>
                 </Button>);
         } else return ""
@@ -71,7 +71,7 @@ class Book extends Component {
             return (
                 <Collapse in={this.state.open === item.id}>
                     <div id="collapseButtons">
-                        <Button value={item.id} onClick={this.reserve} variant={"outline-light"} size={"sm"}>
+                        <Button value={item.id} onClick={this.reserve} variant="outline-success" size={"sm"}>
                             <FontAwesomeIcon icon='highlighter'/> Reserve
                         </Button>
                     </div>
@@ -90,7 +90,7 @@ class Book extends Component {
     }
 
     render() {
-        let {item, item: {status, title, id, ISBN, extension}} = this.props;
+        let {item, item: {status, title, id, image_link}} = this.props;
         return (
             <div className={classNames("bookCard", {
                 [status]: true,
@@ -99,7 +99,7 @@ class Book extends Component {
                 {/*Book cover*/}
                 <div className="column">
                     <div className="img"
-                         style={{backgroundImage: `url(${url}/images/${ISBN}${extension})`}}/>
+                         style={{backgroundImage: `url(${image_link})`}}/>
                     {this.bookActions(item)}
                 </div>
                 {/*Book info*/}

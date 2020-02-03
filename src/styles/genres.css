@@ -1,16 +1,35 @@
-.genre {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    /*border-bottom: 1px solid rgba(255, 255, 255, 0.35);*/
-    border-top: 1px solid rgba(255, 255, 255, 0.35);
-}
+/*.genre {*/
+/*    padding-top: 5px;*/
+/*    padding-bottom: 5px;*/
+/*    !*border-bottom: 1px solid rgba(255, 255, 255, 0.35);*!*/
+/*    border-top: 1px solid rgba(100, 255, 255,1);*/
 
-.genre:hover {
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.2);
-    font-size: 1.07em
+/*}*/
+
+/*.genre:hover {*/
+/*    cursor: pointer;*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    font-size: 1.07em;*/
+/*    color: black;*/
+/*}*/
+
+/*.activeG {*/
+/*    background-color: rgba(255, 255, 255, 0.2);*/
+/*    font-size: 1.07em*/
+/*}*/
+.list-group-item-action{
+     color: white;
+     background-color: transparent;
 }
-.activeG{
-    background-color: rgba(255, 255, 255, 0.2);
-    font-size: 1.07em
+.list-group-item-action.active :focus {
+    color: red !important;
+    background-color: transparent;
+}
+.list-group-item-action.active{
+    background-color: white;
+    color:black
+}
+.list-group-item-action :hover{
+    color: black;
+    background-color: rgba(255,255,255,0.5);
 }

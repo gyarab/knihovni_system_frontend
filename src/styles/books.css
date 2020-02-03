@@ -1,6 +1,5 @@
 .shelfWrapper {
     flex: 1;
-    background-color: rgba(0, 0, 0, 0.75);
 }
 
 .bookBorrowWrapper {
@@ -11,7 +10,7 @@
 
 .bookBorrowWrapper h4{
     text-align: center;
-    color:white;
+    /*color:white;*/
 }
 
 .bookBorrowWrapper .badge{
@@ -38,7 +37,7 @@
 }
 
 .radioSelection {
-    color: white;
+    /*color: white;*/
     display: inline-block;
 }
 

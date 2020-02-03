@@ -1,6 +1,5 @@
 .adminWrapper {
     flex: 1;
-    background-color: rgba(0, 0, 0, 0.75);
     display: flex;
 }
 
@@ -32,10 +31,24 @@
     text-align: center;
 }
 
+.genreList {
+    flex: 2;
+}
+.genreList h4{
+    padding-top: 10px;
+    text-align: center;
+}
+.list-group{
+    background-color: transparent;
+}
+.list-group-item{
+    background-color: transparent;
+}
+
 .takenSearchTypes {
     display: flex;
     justify-content: space-evenly;
-    color: white
+    /*color: white*/
 }
 
 .takenSearchTypes:hover {
@@ -53,7 +66,7 @@
 .takenItem {
     padding-top: 5px;
     padding-bottom: 5px;
-    color: white;
+    /*color: white;*/
     display: flex;
     flex-direction: column;
 }
@@ -101,7 +114,7 @@
 }
 
 .switch {
-    color: white;
+    /*color: white;*/
     text-align: center;
     display: block;
     width: 150px;
@@ -120,14 +133,14 @@
 .divider {
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
+    background-color: black;
     width: 150px;
     height: 1px;
     margin-bottom: 5px;
 }
 
 .statusType {
-    color: white;
+    /*color: white;*/
 }
 
 .statusType:hover {
@@ -154,7 +167,6 @@
 }
 
 .reader .readerName {
-
     align-self: center;
 }
 
@@ -162,7 +174,7 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    color: white;
+    /*color: white;*/
 }
 
 .name:hover {

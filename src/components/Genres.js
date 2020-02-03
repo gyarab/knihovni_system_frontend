@@ -39,17 +39,18 @@ class Genres extends Component {
 
     genres() {
         return this.props.genres.map((genre, index) => {
-            return (<GenreItem selectedGenre={this.props.genre} getAllBooksByGenre={this.props.getAllBooksByGenre}
+            return (<GenreItem variant="warning" selectedGenre={this.props.genre} getAllBooksByGenre={this.props.getAllBooksByGenre}
                                getAllBooks={this.props.getAllBooks}
                                key={index} genre={genre}/>)
         })
     }
 
-    render() {
+    render(){
         return (
             <div>
                 <h4>{this.props.genre === 'All' ? 'Všechny Knihy' : this.props.genre}</h4>
                 <Form.Control
+                    autoFocus
                     className="genreSearch"
                     name="search"
                     placeholder={`Search through genres`}

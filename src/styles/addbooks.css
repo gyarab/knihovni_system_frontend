@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.75);
 }
 .wrapper h2{
     text-align: center;
@@ -81,7 +80,7 @@ form label{
     z-index: -1;
 }
 .title{
-    border: 1px solid #FFC107;
+    border: 1px solid #ffffff;
 }
 .ISBN{
     border: 1px solid #28A745;
