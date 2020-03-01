@@ -154,7 +154,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(reserveBook(id));
     },
     returnBook: (id) => {
-        dispatch(returnTakenBooks([id]));
+        dispatch(returnTakenBooks([{id}]));
     },
     selectToBorrow: (arr) => {
         dispatch(selectToBorrow(arr));
