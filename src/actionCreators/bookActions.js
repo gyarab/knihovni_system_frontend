@@ -152,8 +152,8 @@ export const searchThroughGenres = (genre) => dispatch => {
 const sendImage = (file, id) => {
     let form = new FormData();
     form.append("photo", file);
-    fetch(`${url}/api/books/post/custom/${id}`, { // Your POST endpoint
-        method: 'POST',
+    fetch(`${url}/api/books/post/custom/${id}`, { // Your PUT endpoint
+        method: 'PUT',
         body: form,
     }).then(
         response => response.json()

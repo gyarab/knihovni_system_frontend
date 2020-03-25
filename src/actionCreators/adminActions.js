@@ -52,7 +52,7 @@ export const returnTakenBooks = (arr) => dispatch => {
 };
 
 export const borrowBooks = (obj) => dispatch => {
-    fetch(`${url}/api/admin/borrow`, {
+    fetch(`${url}/api/admin/lend`, {
         method: 'post',
         body: JSON.stringify(obj),
         mode: 'cors',

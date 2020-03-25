@@ -8,10 +8,10 @@ import {returnTakenBooks} from "../actionCreators/adminActions";
 import {selectToBorrow} from "../actionCreators/internalActions";
 import {connect} from "react-redux";
 import '../styles/singleBook.css'
-import {myConfig} from "../config";
-
-let {url} = myConfig;
-
+// import {myConfig} from "../config";
+//
+//  let {url} = myConfig;
+//
 class Book extends Component {
     static defaultProps = {};
 

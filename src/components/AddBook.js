@@ -79,7 +79,7 @@ class AddBook extends Component {
                 return (
                     <div onClick={() => {
                         this.props.saveBook(element.url);
-                    }} key={index} className={classNames('col-2 preWrap', {'offset-1': index % 4 !== 0})}>
+                    }} key={index} className={classNames('col-6 col-sm-3 col-md-2 preWrap', {'offset-1': index % 4 !== 0})}>
                         <img alt={element.title} src={element.image}/>
                         <span>{element.title}</span>
                     </div>
