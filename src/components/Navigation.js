@@ -38,6 +38,7 @@ class Navigation extends Component {
                     <Nav>
                         <Nav.Link exact as={Link} to="/dashboard">Dashboard</Nav.Link>
                         {this.admin()}
+                        {this.props.isLogged ? <Nav.Link exact as={Link} to="/profile">Profile</Nav.Link> : ""}
                     </Nav>
 
 

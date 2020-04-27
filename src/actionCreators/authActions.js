@@ -35,6 +35,8 @@ export const googleAuth = token_id => dispatch => {
         console.log(e)
     )
 };
+
+//self-explanatory
 export const logOut = () => dispatch => {
     localStorage.removeItem('logged');
     localStorage.removeItem('auth');
@@ -45,6 +47,25 @@ export const logOut = () => dispatch => {
         type: 'LOG_OUT'
     })
 };
+
+export const getUser = () => dispatch =>{
+    fetch(`${url}/api/users/debt`,{
+        headers: {
+            'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem('auth')}`,
+        }
+    })
+        .then(res=>  res.json())
+        .then(res => {
+            dispatch({
+                type: 'GET_USER',
+                payload: res,
+            })
+        }).catch(e =>
+        console.log(e)
+    )
+};
+
 //checks whether the login was successful or not
 const check = (res, dispatch) => {
     if (res.status === 400 || res.status === 401 || res.status === 403) {

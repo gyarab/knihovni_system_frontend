@@ -1,5 +1,6 @@
 const initialState = {
     isLogged: localStorage.getItem('logged') === 'true',
+    user:{},
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,8 @@ export default (state = initialState, action) => {
             return {isLogged: false};
         case 'LOG_OUT':
             return {...state, isLogged: false};
+        case 'GET_USER':
+            return {...state, user: action.payload};
         default:
             return state;
     }
