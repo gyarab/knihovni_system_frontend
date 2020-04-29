@@ -1,4 +1,4 @@
-[Poster se nacházi na této adrese](https://imgur.com/a/d1Q7sZ2)  
+[Poster se nacházi na této adrese](https://i.imgur.com/MdfAqyR.jpg)  
   
 ***
   
