@@ -6,6 +6,8 @@ import {NavLink as Link} from "react-router-dom";
 import {connect} from "react-redux";
 import '../styles/navigation.css'
 import {logOut} from "../actionCreators/authActions";
+import Profile from "./Profile";
+import {toggleProfilePopup} from "../actionCreators/internalActions";
 
 class Navigation extends Component {
     static defaultProps = {};
@@ -13,7 +15,8 @@ class Navigation extends Component {
     static propTypes = {};
 
     state = {
-        name: ''
+        name: '',
+        show: false,
     };
 
     admin() {
@@ -38,7 +41,9 @@ class Navigation extends Component {
                     <Nav>
                         <Nav.Link exact as={Link} to="/dashboard">Dashboard</Nav.Link>
                         {this.admin()}
-                        {this.props.isLogged ? <Nav.Link exact as={Link} to="/profile">Profile</Nav.Link> : ""}
+                        {this.props.isLogged ? <Nav.Link onClick={() => {
+                            this.props.toggleProfilePopup()
+                        }}>Profile</Nav.Link> : ""}
                     </Nav>
 
 
@@ -46,6 +51,7 @@ class Navigation extends Component {
                         {this.props.isLogged ?
                             <Navbar.Text onClick={() => {
                                 this.props.logOut();
+                                this.props.toggleProfilePopup();
                             }}>
                                 Signed in as: {localStorage.getItem("name")}
                             </Navbar.Text> :
@@ -53,18 +59,25 @@ class Navigation extends Component {
                         }
 
                     </Nav>
+
                 </Navbar.Collapse>
-            </Navbar></div>
+            </Navbar>{this.props.profile_shown ? <Profile/> : ""}
+
+            </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
     isLogged: state.auth.isLogged,
+    profile_shown: state.internal.profile_shown,
 });
 const mapDispatchToProps = (dispatch) => ({
     logOut: () => {
         dispatch(logOut())
     },
+    toggleProfilePopup: () => {
+        dispatch(toggleProfilePopup())
+    }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

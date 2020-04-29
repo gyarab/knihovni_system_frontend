@@ -4,6 +4,7 @@ const initialState = {
     email: "",
     returnArr: [],
     dashboardType: 'books',
+    profile_shown: false,
 };
 
 export default (state = initialState, action) => {
@@ -48,6 +49,8 @@ export default (state = initialState, action) => {
             else return {...state, dashboardType: 'books'};
         case 'BORROWER_EMAIL':
             return {...state, email: action.payload};
+        case 'PROFILE_TOGGLE':
+            return {...state, profile_shown: !state.profile_shown};
         default:
             return state;
     }

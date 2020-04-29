@@ -13,6 +13,8 @@ import {faHighlighter} from "@fortawesome/free-solid-svg-icons/faHighlighter";
 import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {faAddressCard} from "@fortawesome/free-solid-svg-icons/faAddressCard";
 import {faAdjust} from "@fortawesome/free-solid-svg-icons/faAdjust";
+import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
+import {faSync} from "@fortawesome/free-solid-svg-icons/faSync";
 
 library.add(
     faBook,
@@ -25,5 +27,7 @@ library.add(
     faHighlighter,
     faPlus,
     faAddressCard,
-    faAdjust
+    faAdjust,
+    faTimesCircle,
+    faSync,
 );

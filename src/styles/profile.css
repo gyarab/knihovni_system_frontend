@@ -1,0 +1,28 @@
+.profileContainer {
+    z-index: 1000;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+
+}
+
+.bgProfile {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.90);
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.imgContainer {
+    padding: 10px;
+    align-content: space-between;
+}
+
+.imgContainer img {
+    margin-bottom: 5px;
+}
+
+.btnGrp{
+    display:flex;
+    justify-content: space-between;
+}

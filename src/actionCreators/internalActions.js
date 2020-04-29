@@ -72,4 +72,10 @@ export const updateEmailOnSelect = (email) => dispatch => {
     })
 };
 
+export const toggleProfilePopup = () => dispatch =>{
+  dispatch({
+      type: 'PROFILE_TOGGLE'
+  })
+};
+
 
