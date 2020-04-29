@@ -1,0 +1,3 @@
+[submodule "knihovni_system"]
+	path = knihovni_system
+	url = https://github.com/gyarab/knihovni_system.git
